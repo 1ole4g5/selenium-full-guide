@@ -7,7 +7,7 @@ public class LogInTest extends TestBase {
 
 	@Test
 	public void testLogInTest() {
-		driver.navigate().to(baseUrl);
+		driver.get(baseUrl + "admin");
 		driver.findElement(By.name("username")).sendKeys("admin");
 		driver.findElement(By.name("password")).sendKeys("admin");
 		driver.findElement(By.name("login")).click();
