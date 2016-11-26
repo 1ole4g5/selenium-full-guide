@@ -6,7 +6,7 @@ import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class StickerTest extends TestBase {
+public class SortTest extends TestBase {
 
 	@Test
 	public void testStikerTest() {
