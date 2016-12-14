@@ -20,6 +20,7 @@ public class TestBase {
 		baseUrl = "http://localhost/litecart/";
 		System.out.println(((HasCapabilities) driver).getCapabilities());
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		wait = new WebDriverWait(driver, 10/*seconds*/);
 	}
 
 	@After
