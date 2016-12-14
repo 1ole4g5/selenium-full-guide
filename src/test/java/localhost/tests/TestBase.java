@@ -9,13 +9,14 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.stqa.selenium.factory.WebDriverPool;
 
+
 public class TestBase {
 	public WebDriver driver;
 	public WebDriverWait wait;
 	public String baseUrl;
 
 	@Before
-	public void startBrowser() {
+	public void startBrowser() {		
 		driver = WebDriverPool.DEFAULT.getDriver(DesiredCapabilities.chrome());
 		baseUrl = "http://localhost/litecart/";
 		System.out.println(((HasCapabilities) driver).getCapabilities());
