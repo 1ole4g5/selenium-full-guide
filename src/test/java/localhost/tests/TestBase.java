@@ -1,31 +1,25 @@
 package localhost.tests;
 
-import java.util.concurrent.TimeUnit;
-import org.junit.After;
 import org.junit.Before;
-import org.openqa.selenium.HasCapabilities;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import ru.stqa.selenium.factory.WebDriverPool;
+import localhost.app.Application;
 
 
 public class TestBase {
-	public WebDriver driver;
-	public WebDriverWait wait;
-	public String baseUrl;
+	
+	public static ThreadLocal<Application> tlApp = new ThreadLocal<>();
+	public Application app;
 
 	@Before
-	public void startBrowser() {		
-		driver = WebDriverPool.DEFAULT.getDriver(DesiredCapabilities.chrome());
-		baseUrl = "http://localhost/litecart/";
-		System.out.println(((HasCapabilities) driver).getCapabilities());
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		wait = new WebDriverWait(driver, 10/*seconds*/);
-	}
+	public void start() {	
+		 if (tlApp.get() != null) {
+	            app = tlApp.get();
+	            return;
+	        }
 
-	@After
-	public void stopAllBrowsers() {
-		WebDriverPool.DEFAULT.dismissAll();
-	}
+	        app = new Application();
+	        tlApp.set(app);
+
+	        Runtime.getRuntime().addShutdownHook(
+	                new Thread(() -> { app.quit(); app = null; }));
+	    }
 }
